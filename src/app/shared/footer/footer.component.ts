@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  public daweb: string = 'https://www.instagram.com/danweb_artesdigitais/';
+  public daweb: string = 'https://www.instagram.com/danweb.softwares/';
 }
