@@ -1,6 +1,5 @@
-import { filter } from 'rxjs/operators';
+
 import { Equipament } from './../../../../shared/models/equipament';
-import { EquipamentsService } from './../../../../shared/services/equipaments.service';
 import { ToastrService } from 'ngx-toastr';
 import { SpecificationsService } from 'src/app/shared/services/specifications.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -18,6 +17,7 @@ import { StatusDialogComponent } from '../status-dialog/status-dialog.component'
 import { StickyNotesDialogComponent } from '../sticky-notes-dialog/sticky-notes-dialog.component';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { UserService } from 'src/app/shared/services/user.service';
+import html2canvas from 'html2canvas';
 
 
 
@@ -328,6 +328,21 @@ import { UserService } from 'src/app/shared/services/user.service';
       }
 
       return ret;
+    }
+
+    download(){
+      let container = document.getElementById("calendar-main-table");
+      let today = new Date();
+      let imageName = `AgendaDia-${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}.png`
+      html2canvas(container,{allowTaint : true}).then(function(canvas) {
+      
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.download = imageName;
+        link.href = canvas.toDataURL("image/png");
+        link.target = '_blank';
+        link.click();
+      });
     }
 
     ajusteCSS(): void {

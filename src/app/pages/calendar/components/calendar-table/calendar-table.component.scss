@@ -186,8 +186,8 @@ table {
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 220px;
-  background-color: #555;
+  width: 70px;
+  background-color: $danweb-color;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -195,9 +195,9 @@ table {
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
-  bottom: 50%;
+  bottom: 70%;
   left: 50%;
-  margin-left: -160px;
+  margin-left: -50px;
 
   /* Fade in tooltip */
   opacity: 0;
@@ -213,7 +213,7 @@ table {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: $danweb-color transparent transparent transparent;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
