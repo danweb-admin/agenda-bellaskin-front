@@ -30,6 +30,7 @@ export class AvailabilityTableComponent implements OnInit, AfterViewInit {
   days_: any = [];
   showTable: boolean = false;
   monthYear_: string;
+  years: any = [];
 
   
   constructor(private equipamentService: EquipamentsService,
@@ -40,12 +41,24 @@ export class AvailabilityTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ajusteCSS();
+    
+  }
+
+  addYears() {
+    var start = new Date();
+
+    var loop = -1;
+    while(loop < 10){
+      this.years.push(start.getFullYear() + loop);
+      loop++;
+    };    
   }
 
   public ngOnInit(): void {
     this.getEquipaments();
     this.createForm();
     this.initializeMonths();
+    this.addYears();
   }
 
   change(){
@@ -104,7 +117,7 @@ export class AvailabilityTableComponent implements OnInit, AfterViewInit {
   }
 
   download(){
-    var container = document.getElementById("main-table");; // full page 
+    var container = document.getElementById("main-table");
 		html2canvas(container,{allowTaint : true}).then(function(canvas) {
 		
 			var link = document.createElement("a");
