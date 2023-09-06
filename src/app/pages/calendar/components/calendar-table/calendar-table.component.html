@@ -147,7 +147,7 @@
   </mat-card>
 
 
-  <mat-card class="calendar-table" *ngIf="!isAdmin">
+  <mat-card class="calendar-table" *ngIf="!isAdmin" id="calendar-main-table">
     <mat-card-title class="calendar-table__header">
         <h5 class="calendar-table__title">Agenda do dia {{time | date:'dd/MM/yyyy EE' : '' : 'pt-BR'}}</h5>
         
@@ -160,6 +160,9 @@
             </button>
             <button mat-icon-button (click)="followingDay()">
                 <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+            <button mat-icon-button (click)="download()">
+                <mat-icon>download</mat-icon>
             </button>
             <div class="calendar-table-wrapper__search">
                 <input matInput class="calendar-table-wrapper__search-input" [matDatepicker]="dp"  placeholder="Data locação" #inputSearch (dateInput)="applyFilter($event)" style="visibility: hidden;">
@@ -240,14 +243,14 @@
                         </div>
                     </td>
                     <td>
-                        <div *ngFor="let item of element.calendars" >
+                        <div *ngFor="let item of element.calendars" (click)="openDialogDriver(item,false)">
                             <div class="row padding-left-5">
                                 {{item.driver?.name}}
                             </div>
                         </div>
                     </td>
                     <td>
-                        <div *ngFor="let item of element.calendars" >
+                        <div *ngFor="let item of element.calendars" (click)="openDialogDriver(item,true)">
                             <div class="row padding-left-5">
                                 {{item.driverCollects?.name}}
                             </div>

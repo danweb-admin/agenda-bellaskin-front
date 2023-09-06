@@ -10,7 +10,7 @@
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Nome" formControlName="name">
+            <input matInput placeholder="Nome" formControlName="name" required>
           </mat-form-field>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class="col col-2">
           <mat-form-field appearance="outline">
             <mat-label>Celular</mat-label>
-            <input matInput placeholder="Celular" mask="(00) 00000-0000" formControlName="cellPhone">
+            <input matInput placeholder="Celular" mask="(00) 00000-0000" formControlName="cellPhone" required>
           </mat-form-field>
         </div>
         <div class="col col-2" *ngIf="isDriver">
