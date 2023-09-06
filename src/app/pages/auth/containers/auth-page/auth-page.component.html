@@ -8,33 +8,16 @@
         <mat-tab label="Login">
           <h4 class="auth-page__group-title">Bem vindo, Usuário</h4>
 
-          <div class="auth-page__border-wrapper">
-            <div class="auth-page__border-line"></div>
-            <p class="auth-page__border-title">or</p>
-            <div class="auth-page__border-line"></div>
-          </div>
-
+          
           <app-login-form (sendLoginForm)="sendLoginForm()"></app-login-form>
-
-        </mat-tab>
-        <mat-tab label="Novo Usuário">
-          <h4 class="auth-page__group-title">Bem vindo!</h4>
-          <p class="auth-page__group-sub-title">Crie sua conta</p>
-
-          <app-sign-form (sendSignForm)="sendSignForm()"></app-sign-form>
-
-          <div class="auth-page__border-wrapper">
-            <div class="auth-page__border-line"></div>
-            <div class="auth-page__border-line"></div>
-          </div>
         </mat-tab>
       </mat-tab-group>
     </div>
   </div>
   <div class="auth-page__logo">
     <div class="auth-page__logo-wrapper">
-      <img class="auth-page__logo-img" src="./assets/logo3.jpeg" alt="logo">
-      <h6 class="auth-page__logo-title">AgenDanweb</h6>
+      <img class="auth-page__logo-img" src="./assets/logo.jpeg" alt="logo">
+      <h6 class="auth-page__logo-title">AgenDanWeb</h6>
     </div>
   </div>
 </div>
