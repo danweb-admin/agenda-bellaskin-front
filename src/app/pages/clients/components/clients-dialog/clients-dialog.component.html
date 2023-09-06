@@ -12,7 +12,7 @@
             <div class="col">
               <mat-form-field appearance="outline">
                 <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" formControlName="name">
+                <input matInput placeholder="Nome" formControlName="name" required>
               </mat-form-field>
             </div>
           </div>
@@ -48,13 +48,13 @@
             <div class="col col-2">
               <mat-form-field appearance="outline">
                 <mat-label>Endereço</mat-label>
-                <input matInput placeholder="Endereço"  formControlName="address" maxlength="70">
+                <input matInput placeholder="Endereço"  formControlName="address" maxlength="70" required>
               </mat-form-field>
             </div>
             <div class="col col-2">
               <mat-form-field appearance="outline">
                 <mat-label>Número</mat-label>
-                <input matInput placeholder="Número" formControlName="number" maxlength="15">
+                <input matInput placeholder="Número" formControlName="number" maxlength="15" required>
               </mat-form-field>
             </div>
           </div>
@@ -147,7 +147,7 @@
             <div class="col col-2">
               <mat-form-field appearance="outline">
               <mat-label>Estado</mat-label>
-                <mat-select  formControlName="stateId" (openedChange)="openedState($event)" (selectionChange)="getCidadesByEstado($event.value)" #estado>
+                <mat-select  formControlName="stateId" (openedChange)="openedState($event)" (selectionChange)="getCidadesByEstado($event.value)" #estado required>
                   <input matInput class="input-estado" placeholder="Digite o estado" (keyup)="onKeyState($event.target.value)" #stateInputSearch>
                   <mat-option  *ngFor="let estado of arrayEstados "
                             value="{{estado.id}}">
@@ -159,8 +159,8 @@
             <div class="col col-2">
               <mat-form-field appearance="outline">
               <mat-label>Cidade</mat-label>
-                <mat-select #cidade formControlName="cityId" (openedChange)="openedCity()" >
-                  <input matInput class="input-cidade" placeholder="Digite a cidade" (keyup)="onKeyCity($event.target.value)" #cityInputSearch>
+                <mat-select #cidade formControlName="cityId" (openedChange)="openedCity()" required>
+                  <input matInput class="input-cidade" placeholder="Digite a cidade" (keyup)="onKeyCity($event.target.value)" #cityInputSearch >
                   <mat-option *ngFor="let cidade of arrayCidades "
                             value="{{cidade.id}}">
                     {{cidade.nome}}

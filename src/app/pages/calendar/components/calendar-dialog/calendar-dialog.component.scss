@@ -5,3 +5,10 @@ mat-form-field {
 mat-select {
   display: 'contents' !important;
 }
+
+input:required {
+  border-color: red !important;
+}
+input:required + label {
+  color: red;
+}
