@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  URL_API: 'http://44.206.38.149:30487',
+  URL_API: 'https://localhost:8091',
   hmr: false,
   role: ''
 };
