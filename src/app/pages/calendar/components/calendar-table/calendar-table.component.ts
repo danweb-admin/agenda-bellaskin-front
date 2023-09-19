@@ -167,7 +167,6 @@ import html2canvas from 'html2canvas';
     openDialogDriver(element: Calendar, isCollect: boolean){
       let isDriver = true;
       let role = localStorage.getItem('role');
-      debugger
 
       if (role === 'viewer'){
         return;

@@ -13,6 +13,7 @@ export interface Calendar {
     techniqueId: string,
     driver: string,
     driverId: string,
+    driverCollectsId: string,
     status: string,
     startTime1: string,
     startTime: string,
