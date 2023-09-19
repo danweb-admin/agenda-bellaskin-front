@@ -257,7 +257,6 @@ const moment = _rollupMoment || _moment;
     }
 
     onSubmit(){
-      debugger
       if (this.form.value.id === ""){
         this.form.value.clientId = this.form.value.client.id;
         this.calendarService.save(this.form.value).subscribe((resp: Calendar) => {
