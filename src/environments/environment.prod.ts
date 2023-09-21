@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  URL_API: 'http://24.199.89.58:32100',
+  URL_API: 'http://161.35.255.131:32100',
   hmr: false,
   role: ''
 };
