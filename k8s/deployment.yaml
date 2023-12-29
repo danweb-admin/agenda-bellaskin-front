@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: bella-skin-front
+  namespace: bella-skin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bella-skin-front
+  template:
+    metadata:
+      labels:
+        app: bella-skin-front
+    spec:
+      containers:
+        - name: bella-skin-front
+          image: williambr2022/bella-skin-front
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+        

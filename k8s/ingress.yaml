@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-hosts
+  namespace: bella-skin
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-bella-skin"
+spec:
+  tls:
+  - hosts:
+    - "bella-skin.api-danweb-softwares.click"
+    secretName: "bella-skin-tls"
+  - hosts:
+    - "bella-skin.app-danweb-softwares.click"
+    secretName: "bella-skin-front-tls"
+  rules:
+  - host: bella-skin.api-danweb-softwares.click
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: bella-skin-back-svc
+            port: 
+              number: 80
+  - host: bella-skin.app-danweb-softwares.click
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: bella-skin-front-svc
+            port: 
+              number: 80
