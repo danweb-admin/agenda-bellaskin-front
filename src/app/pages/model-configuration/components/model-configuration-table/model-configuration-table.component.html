@@ -1,0 +1,30 @@
+<mat-card class="model-configuration-table">
+    <mat-card-title class="model-configuration-table__header">
+      <h5 class="model-configuration-table__title">Lista de Modelos</h5>
+
+      <button mat-icon-button (click)="openDialog(null)">
+        <mat-icon>control_point</mat-icon>
+      </button>
+    </mat-card-title>
+  
+    <mat-card-content >
+        <table class="model-configuration-table__table">
+            <thead>
+                <tr>
+                    <th class="model-configuration-table__table-row-title">NOME DO MODELO</th>
+                    <th class="model-configuration-table__table-row-title">NOME ARQUIVO</th>
+                    <th class="model-configuration-table__table-row-title">ATIVO?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSource" (click)="openDialog(item)" class="model-configuration-table__row">
+                    <td class="model-configuration-table__cell">{{item.name}}</td>
+                    <td class="model-configuration-table__cell">{{item.modelFileName}}</td>
+                    <td class="model-configuration-table__cell">{{showAtivo(item.active)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+  </mat-card>
+  
+  

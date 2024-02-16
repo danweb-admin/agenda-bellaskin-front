@@ -58,9 +58,6 @@ export class Interceptor implements HttpInterceptor {
 
   showError(error: HttpErrorResponse): void{
     switch(error?.status){
-      case 400: //BadRequest
-        this.toastr.error(error.error.message);
-        break;
       case 401: //Unauthorized
         this.router.navigate([this.routers.LOGIN]).then();
         this.toastr.error('Faça o login novamente');

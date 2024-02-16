@@ -1,0 +1,49 @@
+<h3 *ngIf="isAddMode" mat-dialog-title>Adicionar Modelo</h3>
+<h3 *ngIf="!isAddMode" mat-dialog-title>Editar Modelo</h3>
+<div mat-dialog-content style="height: 250px !important;">
+  <form [formGroup]="form">
+    <div class="form-row">
+      <input type="hidden" formControlName="id">
+      <input type="hidden" formControlName="createdAt">
+      <input type="hidden" formControlName="updatedAt">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome do Modelo</mat-label>
+            <input matInput placeholder="Nome" formControlName="name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-custom-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome do Arquivo do Modelo</mat-label>
+            <input matInput #modelFileName placeholder="Arquivo do Modelo"  formControlName="modelFileName"  style="pointer-events:none">
+          </mat-form-field>
+        </div>
+        <button mat-button color="warn" (click)="onClick()" style="margin-top: 10px;">  
+          <mat-icon>file_upload</mat-icon>  
+          Selecione Modelo  
+        </button>
+        <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="docx" style="display: none;" />
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Equipamento</mat-label>
+            <mat-select class="tipo-atributo" formControlName="equipamentId">
+              <mat-option  *ngFor="let item of equipament "
+                            value="{{item.id}}">
+                    {{item.name}}
+                  </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
+</div>

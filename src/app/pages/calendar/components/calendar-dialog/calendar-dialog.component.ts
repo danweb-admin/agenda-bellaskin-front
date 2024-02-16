@@ -1,30 +1,25 @@
 import { Calendar } from './../../../../shared/models/calendar';
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { debounceTime, filter, switchMap } from 'rxjs/operators';
-import { City } from 'src/app/shared/models/city';
 import { Equipament } from 'src/app/shared/models/equipament';
 import { EquipamentSpecifications } from 'src/app/shared/models/equipamentSpecifications';
 import { Person } from 'src/app/shared/models/person';
 import { Specification } from 'src/app/shared/models/specification';
-import { State } from 'src/app/shared/models/state';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { EquipamentsService } from 'src/app/shared/services/equipaments.service';
-import { EstadosCidadesServices } from 'src/app/shared/services/estados-cidades.service';
 import { PersonService } from 'src/app/shared/services/people.service';
 import { SpecificationsService } from 'src/app/shared/services/specifications.service';
-import { Client } from '../../../../shared/models/client';
 import { ClientsService } from '../../../../shared/services/clients.service';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment} from 'moment';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from 'src/app/consts/my-format';
-import { CDK_DESCRIBEDBY_HOST_ATTRIBUTE } from '@angular/cdk/a11y';
 
 const moment = _rollupMoment || _moment;
 
@@ -186,6 +181,7 @@ const moment = _rollupMoment || _moment;
         note: this.inputReadonly ? [{value: this.data.element?.note, disabled: true}] : [this.data.element?.note],
         userId: [this.data.element?.userId],
         parentId: [this.data.element?.parentId],
+        value: this.inputReadonly ? [{value: this.data.element?.value.toString().replace('.',',') || null,disabled: true},Validators.required] : [{value: this.data.element?.value.toString().replace('.',',') || null, disabled: false},Validators.required],
         travelOn: this.inputReadonly ? [{value: this.data.element?.travelOn || 0, disabled: true}] : [{value: this.data.element?.travelOn || 0, disabled: false}],
         date: this.inputReadonly ? [{value: this.data.element?.date || null,disabled: true},Validators.required] : [{value: this.data.element?.date || null, disabled: false},Validators.required],
         startTime1:this.inputReadonly ? [{value: this.data.element?.startTime.substring(11,16), disabled: true}] : [this.data.element?.startTime.substring(11,16) || null,Validators.required],

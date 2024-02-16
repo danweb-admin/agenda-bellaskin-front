@@ -10,12 +10,17 @@ mat-toolbar.page-header {
     padding: 70px 24px 16px 24px !important;
 }
 
+mat-card-content {
+  min-height: 400px;
+}
+
 table > thead > tr > th {
   border-bottom: 0.5px solid #B9B9B9 !important;
 }
 
 table > tbody > tr > td {
   border-bottom: 0.5px solid #B9B9B9 !important;
+  min-height: 22px;
   cursor: pointer;
 }
 

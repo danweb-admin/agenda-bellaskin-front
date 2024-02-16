@@ -1,0 +1,48 @@
+<mat-card class="generate-contract-table">
+    <mat-card-title class="generate-contract-table__header">
+      <h5 class="generate-contract-table__title">Lista de Locações</h5>
+
+      <div class="row">
+          <div class="button-hoje" >
+            <button mat-icon-button (click)="today()" >
+                HOJE
+            </button>
+          </div>
+        
+        
+        <div class="generate-contract-table-wrapper__search" style="float: left; width: 235px;">
+            
+            <input matInput class="generate-contract-table-wrapper__search-input" [matDatepicker]="dp"   #inputSearch (dateInput)="applyFilter($event)" style="visibility: hidden; width: 1px;">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+            {{time | date:'dd/MM/yyyy EE' : '' : 'pt-BR'}}
+        </div>
+        
+    </div>
+    </mat-card-title>
+  
+    <mat-card-content >
+        <table class="generate-contract-table__table">
+            <thead>
+                <tr>
+                    <th class="generate-contract-table__table-row-title">NOME DO LOCATÁRIO</th>
+                    <th class="generate-contract-table__table-row-title">EQUIPAMENTO</th>
+                    <th class="generate-contract-table__table-row-title">AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSource"  class="generate-contract-table__row">
+                    <td class="generate-contract-table__cell">{{item.client.name}}</td>
+                    <td class="generate-contract-table__cell">{{item.equipament.name}}</td>
+                    <td class="generate-contract-table__cell">
+                        <button mat-raised-button color="primary" (click)="generateContract(item.id)">Gerar</button>
+                        <button mat-raised-button color="basic" [disabled]="!item.contractPath" (click)="downloadContract(item)">Download</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+  </mat-card>
+  
+  

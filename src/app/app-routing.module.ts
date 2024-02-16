@@ -97,6 +97,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/availability/availability.module' ).then(m => m.AvailabilityModule)
   },
   {
+    path: 'configuracao-modelo',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/model-configuration/model-configuration.module' ).then(m => m.ModelConfigurationModule)
+  },
+  {
+    path: 'gerar-contratos',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/generate-contract/generate-contract.module' ).then(m => m.GenerateContractModule)
+  },
+  {
     path: '**',
     redirectTo: '404'
   }

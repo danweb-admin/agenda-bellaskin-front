@@ -1,7 +1,4 @@
 <mat-list>
-  <mat-list-item *ngIf="isAdmin" routerLink="{{routes.DASHBOARD}}" routerLinkActive="active">
-    <mat-icon>home</mat-icon> Dashboard
-  </mat-list-item>
   <mat-list-item *ngIf="isAdmin" routerLink="{{routes.PEOPLE}}" routerLinkActive="active">
     <mat-icon>local_shipping</mat-icon> Motoristas/Técnicas
   </mat-list-item>
@@ -23,16 +20,28 @@
     <mat-icon>assignment</mat-icon> Locações
   </mat-list-item>
     <div>
-      <mat-list-item class="ui-element" routerLink="{{routes.CALENDAR}}" routerLinkActive="active">
+      <mat-list-item class="ui-element" [style.display]="isOpenLocations ? 'flex' : 'none'"  routerLink="{{routes.CALENDAR}}" routerLinkActive="active">
         <div class="circle"></div>Agenda
       </mat-list-item>
-      <mat-list-item *ngIf="isAdmin" class="ui-element"  routerLink="{{routes.SCHEDULES}}" routerLinkActive="active">
+      <mat-list-item *ngIf="isAdmin" class="ui-element" [style.display]="isOpenLocations ? 'flex' : 'none'" routerLink="{{routes.SCHEDULES}}" routerLinkActive="active">
         <div class="circle"></div>Agendamentos
       </mat-list-item>
-      <mat-list-item *ngIf="isAdmin" class="ui-element"  routerLink="{{routes.AVAILABILITY}}" routerLinkActive="active">
+      <mat-list-item *ngIf="isAdmin" class="ui-element" [style.display]="isOpenLocations ? 'flex' : 'none'" routerLink="{{routes.AVAILABILITY}}" routerLinkActive="active">
         <div class="circle"></div>Disponibilidade
       </mat-list-item>
     </div>
+    <mat-list-item (click)="openContracts()">
+      <mat-icon>description</mat-icon> Contratos
+    </mat-list-item>
+      <div>
+        <mat-list-item class="ui-element" [style.display]="isOpenContracts ? 'flex' : 'none'" routerLink="{{routes.MODEL_CONFIGURATION}}" routerLinkActive="active">
+          <div class="circle"></div>Configuração de Modelos
+        </mat-list-item>
+        <mat-list-item *ngIf="isAdmin" class="ui-element" [style.display]="isOpenContracts ? 'flex' : 'none'"  routerLink="{{routes.CONTRACTS}}" routerLinkActive="active">
+          <div class="circle"></div>Gerar Contratos
+        </mat-list-item>
+        
+      </div>
   <mat-list-item routerLink="{{routes.TYPOGRAPHY}}" routerLinkActive="active" [style.display]="'none'">
     <mat-icon>text_fields</mat-icon> Typography
   </mat-list-item>

@@ -11,6 +11,7 @@ export class SidebarComponent {
   public routes: typeof routes = routes;
   public isOpenLocations = false;
   public isOpenEquipaments = false;
+  public isOpenContracts = false;
   isAdmin = false;
 
   constructor(private userService: UserService){
@@ -23,5 +24,9 @@ export class SidebarComponent {
 
   public openEquipaments(){
     this.isOpenEquipaments = !this.isOpenEquipaments;
+  }
+
+  public openContracts(){
+    this.isOpenContracts = !this.isOpenContracts;
   }
 }

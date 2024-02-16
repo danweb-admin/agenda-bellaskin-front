@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col col-2">
+        <div class="col col-3">
           <mat-form-field appearance="outline">
             <mat-label>Técnica</mat-label>
             <mat-select id="techniqueId" formControlName="techniqueId" [(value)]="form.value.techniqueId">
@@ -73,7 +73,7 @@
           </mat-form-field>
         </div>
         
-        <div class="col col-2">
+        <div class="col col-3">
           <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
@@ -83,6 +83,12 @@
               <mat-option value="4">Excluida</mat-option>
               <mat-option value="5">Pré Agendada</mat-option>
             </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col col-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Valor Locação</mat-label>
+            <input matInput type="text" formControlName="value" oninput="this.value = this.value.replace(/[^0-9,]/g, '').replace(/(\..*?)\..*/g, '$1');" >
           </mat-form-field>
         </div>
       </div>
@@ -163,5 +169,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
-  <button *ngIf="!inputReadonly" mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
+  <button *ngIf="!inputReadonly" mat-raised-button color="primary"  (click)="onSubmit()">Salvar</button>
 </div>

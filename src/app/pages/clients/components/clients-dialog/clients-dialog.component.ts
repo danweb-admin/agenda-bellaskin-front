@@ -84,6 +84,7 @@ import { ClientsService } from '../../../../shared/services/clients.service';
         takeTransformer: [this.data.element?.takeTransformer],
         has220V: [this.data.element?.has220V],
         hasStairs: [this.data.element?.hasStairs],
+        hasElevator: [this.data.element?.hasElevator],
         hasTechnique: [this.data.element?.hasTechnique],
         techniqueOption1: [this.data.element?.techniqueOption1 || ''],
         techniqueOption2: [this.data.element?.techniqueOption2 || ''],
