@@ -180,6 +180,8 @@ const moment = _rollupMoment || _moment;
         noCadastre: this.inputReadonly ? [{value: this.data.element?.noCadastre || false, disabled: true}] : [{value: this.data.element?.noCadastre || false, disabled: false}],
         note: this.inputReadonly ? [{value: this.data.element?.note, disabled: true}] : [this.data.element?.note],
         userId: [this.data.element?.userId],
+        discount: this.inputReadonly ? [{value: this.data.element?.discount, disabled: true}] : [{value: this.data.element?.discount, disabled: false}],
+        freight: this.inputReadonly ? [{value: this.data.element?.freight, disabled: true}] : [{value: this.data.element?.freight, disabled: false}],
         parentId: [this.data.element?.parentId],
         value: this.inputReadonly ? [{value: this.data.element?.value.toString().replace('.',',') || null,disabled: true},Validators.required] : [{value: this.data.element?.value.toString().replace('.',',') || null, disabled: false},Validators.required],
         travelOn: this.inputReadonly ? [{value: this.data.element?.travelOn || 0, disabled: true}] : [{value: this.data.element?.travelOn || 0, disabled: false}],
