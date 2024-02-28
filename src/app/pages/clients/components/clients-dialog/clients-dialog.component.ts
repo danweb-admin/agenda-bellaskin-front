@@ -73,6 +73,8 @@ import { ClientsService } from '../../../../shared/services/clients.service';
         ie: [this.data.element?.ie || ''],
         cpf: [this.data.element?.cpf || ''],
         rg: [this.data.element?.rg || ''],
+        discount: [this.data.element?.discount || 0],
+        freight: [this.data.element?.freight || 0],
         secretary: [this.data.element?.secretary || ''],
         complement: [this.data.element?.complement || ''],
         cityId: [this.data.element?.cityId || '', Validators.required],
@@ -102,6 +104,14 @@ import { ClientsService } from '../../../../shared/services/clients.service';
         this.estados = resp;
         this.arrayEstados = resp;
       });
+    }
+
+    onlyNumbers(event){
+      let charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return;
+      }
     }
 
     getCidadesByEstado(estado_id: number){

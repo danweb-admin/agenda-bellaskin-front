@@ -50,6 +50,8 @@ const moment = _rollupMoment || _moment;
     inputReadonly = true;
     semCadastro = false;
     @ViewChild('selectIcon') selectIcon;
+    @ViewChild('discount') discount: any;
+    @ViewChild('freight') freight: any;
     selectedtype: any;
     icons: any = [
       {
@@ -133,6 +135,12 @@ const moment = _rollupMoment || _moment;
       })
     }
 
+    optionSelected(event){
+      this.discount.nativeElement.value = event.source.value.discount;
+      this.freight.nativeElement.value = event.source.value.freight;
+
+    }
+
     displayFn(item) {
       if (item === null)
         return;
@@ -211,6 +219,14 @@ const moment = _rollupMoment || _moment;
         this.techniqueResult = resp.filter(x => x.personType === 'T');
         this.driverResult = resp.filter(x => x.personType === 'M');
       })
+    }
+
+    onlyNumbers(event){
+      let charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return;
+      }
     }
 
     getEquipaments(): void{
