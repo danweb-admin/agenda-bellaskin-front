@@ -138,6 +138,9 @@ const moment = _rollupMoment || _moment;
     optionSelected(event){
       this.discount.nativeElement.value = event.source.value.discount;
       this.freight.nativeElement.value = event.source.value.freight;
+      this.form.controls['discount'].setValue(event.source.value.discount);
+      this.form.controls['freight'].setValue(event.source.value.freight);
+
 
     }
 
@@ -203,6 +206,7 @@ const moment = _rollupMoment || _moment;
       });
       this.semCadastro = this.form.value.noCadastre;
       this.selectedtype = this.icons.find(x => x.id == this.form.value.travelOn).icon;
+      console.log(this.data.element);
       
     } 
 
