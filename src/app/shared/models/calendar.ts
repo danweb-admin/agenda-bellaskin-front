@@ -19,5 +19,6 @@ export interface Calendar {
     startTime: string,
     endTime1: string,
     endTime: string,
+    courtesy: boolean,
     calendarSpecifications: CalendarSpecifications[]
   }

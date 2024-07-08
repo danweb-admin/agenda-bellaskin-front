@@ -136,12 +136,8 @@ const moment = _rollupMoment || _moment;
     }
 
     optionSelected(event){
-      this.discount.nativeElement.value = event.source.value.discount;
-      this.freight.nativeElement.value = event.source.value.freight;
-      this.form.controls['discount'].setValue(event.source.value.discount);
-      this.form.controls['freight'].setValue(event.source.value.freight);
-
-
+      this.form.controls['discount'].setValue(event.source.value.discount.toFixed(2).replace('.',','));
+      this.form.controls['freight'].setValue(event.source.value.freight.toFixed(2).replace('.',','));
     }
 
     displayFn(item) {
@@ -164,7 +160,7 @@ const moment = _rollupMoment || _moment;
       let array = [];
       this.id = this.data.element;
       this.isAddMode = !this.id;
-
+      
       if (!this.isAddMode){
         
         list.forEach(item => {
@@ -188,13 +184,14 @@ const moment = _rollupMoment || _moment;
         driverCollectsId: this.inputReadonly ? [{value: this.data.element?.driverCollectsId, disabled: true}] : [{value: this.data.element?.driverCollectsId, disabled: false}],
         techniqueId: this.inputReadonly ? [{value: this.data.element?.techniqueId, disabled: true}] : [{value: this.data.element?.techniqueId, disabled: false}],
         active: [true],
+        courtesy: this.inputReadonly ? [{value: this.data.element?.courtesy, disabled: true}] : [this.data.element?.courtesy || false],
         noCadastre: this.inputReadonly ? [{value: this.data.element?.noCadastre || false, disabled: true}] : [{value: this.data.element?.noCadastre || false, disabled: false}],
         note: this.inputReadonly ? [{value: this.data.element?.note, disabled: true}] : [this.data.element?.note],
         userId: [this.data.element?.userId],
-        discount: this.inputReadonly ? [{value: this.data.element?.discount, disabled: true}] : [{value: this.data.element?.discount, disabled: false}],
-        freight: this.inputReadonly ? [{value: this.data.element?.freight, disabled: true}] : [{value: this.data.element?.freight, disabled: false}],
+        discount: this.inputReadonly ? [{value: this.data.element?.discount.toFixed(2).replace('.',',') || 0, disabled: true}] : [{value: this.data.element?.discount.toFixed(2).replace('.',',') || 0, disabled: false}],
+        freight: this.inputReadonly ? [{value: this.data.element?.freight.toFixed(2).replace('.',',') || 0, disabled: true}] : [{value: this.data.element?.freight.toFixed(2).replace('.',',') || 0, disabled: false}],
+        value: this.inputReadonly ? [{value: this.data.element?.value.toFixed(2).replace('.',',') || 0, disabled: true}] : [{value: this.data.element?.value.toFixed(2).replace('.',',') || 0, disabled: false}] ,
         parentId: [this.data.element?.parentId],
-        value: this.inputReadonly ? [{value: this.data.element?.value.toString().replace('.',',') || null,disabled: true},Validators.required] : [{value: this.data.element?.value.toString().replace('.',',') || null, disabled: false},Validators.required],
         travelOn: this.inputReadonly ? [{value: this.data.element?.travelOn || 0, disabled: true}] : [{value: this.data.element?.travelOn || 0, disabled: false}],
         date: this.inputReadonly ? [{value: this.data.element?.date || null,disabled: true},Validators.required] : [{value: this.data.element?.date || null, disabled: false},Validators.required],
         startTime1:this.inputReadonly ? [{value: this.data.element?.startTime.substring(11,16), disabled: true}] : [this.data.element?.startTime.substring(11,16) || null,Validators.required],
@@ -206,7 +203,6 @@ const moment = _rollupMoment || _moment;
       });
       this.semCadastro = this.form.value.noCadastre;
       this.selectedtype = this.icons.find(x => x.id == this.form.value.travelOn).icon;
-      console.log(this.data.element);
       
     } 
 
@@ -225,18 +221,18 @@ const moment = _rollupMoment || _moment;
       })
     }
 
-    onlyNumbers(event){
-      let charCode = (event.which) ? event.which : event.keyCode;
-      if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-        event.preventDefault();
-        return;
-      }
-    }
-
     getEquipaments(): void{
       this.equipamentService.loadEquipaments(true).subscribe((resp: Equipament[]) => {
         this.equipamentResult = resp;
       })
+    }
+
+    courtesy(event){
+
+      if (event.checked){
+        this.form.controls['value'].setValue("0,00");
+      }
+      
     }
 
     onRoomChange(value){
@@ -275,6 +271,7 @@ const moment = _rollupMoment || _moment;
     }
 
     onSubmit(){
+      this.adjustFormValues();
       if (this.form.value.id === ""){
         this.form.value.clientId = this.form.value.client.id;
         this.calendarService.save(this.form.value).subscribe((resp: Calendar) => {
@@ -298,6 +295,20 @@ const moment = _rollupMoment || _moment;
         );
       }
     }
+
+    adjustFormValues(){
+      for (const field in this.form.controls) { // 'field' is a string
+        
+        if (field == "discount" || field == "freight" || field == "value"){
+          const control = this.form.get(field);
+          const currentValue = control.value.toString();
+				  const newValue  = currentValue.replace(',', '.');
+          control.patchValue(newValue);
+          control.enable();
+        }
+        
+      }
+		}
 
     compare(dateTimeA, dateTimeB) {
       var data_locacao = moment(dateTimeA,"YYYY-MM-DD");

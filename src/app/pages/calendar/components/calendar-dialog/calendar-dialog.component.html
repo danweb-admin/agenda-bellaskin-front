@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col col-3">
+        <div class="col col-2">
           <mat-form-field appearance="outline">
             <mat-label>Técnica</mat-label>
             <mat-select id="techniqueId" formControlName="techniqueId" [(value)]="form.value.techniqueId">
@@ -73,7 +73,7 @@
           </mat-form-field>
         </div>
         
-        <div class="col col-3">
+        <div class="col col-2">
           <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
@@ -85,12 +85,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col col-3">
-          <mat-form-field appearance="outline">
-            <mat-label>Valor Locação</mat-label>
-            <input matInput type="text" formControlName="value" oninput="this.value = this.value.replace(/[^0-9,]/g, '').replace(/(\..*?)\..*/g, '$1');" >
-          </mat-form-field>
-        </div>
+        
       </div>
       <div class="row">
         <div class="col col-2">
@@ -133,17 +128,26 @@
         </div>
       </div>
       <div class="row">
-        <div class="col col-2">
+        <div class="col col-4">
           <mat-form-field appearance="outline">
             <mat-label>Desconto</mat-label>
-            <input matInput placeholder="Desconto" formControlName="discount" (keydown)="onlyNumbers($event)" #discount>
+            <input matInput placeholder="Desconto" formControlName="discount" prefix="R$ " mask="separator.2" thousandSeparator="." #discount>
           </mat-form-field>
         </div>
-        <div class="col col-2">
+        <div class="col col-4">
           <mat-form-field appearance="outline">
             <mat-label>Frete</mat-label>
-            <input matInput placeholder="Frete" formControlName="freight" (keydown)="onlyNumbers($event)" #freight>
+            <input matInput placeholder="Frete" formControlName="freight" prefix="R$ " mask="separator.2" thousandSeparator="." #freight>
           </mat-form-field>
+        </div>
+        <div class="col col-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Valor Locação</mat-label>
+            <input matInput type="text" formControlName="value" prefix="R$ " mask="separator.2" thousandSeparator=".">
+          </mat-form-field>
+        </div>
+        <div class="col" style="width: 25%; margin-top: 15px; margin-left: 10px;"> 
+          <mat-checkbox (change)="courtesy($event)" formControlName="courtesy" >Cortesia</mat-checkbox>
         </div>
       </div>
       <div class="row">
