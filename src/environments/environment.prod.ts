@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  URL_API: 'https://bella-skin.api-danweb-softwares.click',
+  URL_API: 'http://174.129.114.68:32100',
   hmr: false,
   role: ''
 };
