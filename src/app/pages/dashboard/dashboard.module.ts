@@ -27,6 +27,7 @@ import {
 } from './components';
 import { SharedModule } from '../../shared/shared.module';
 import { DashboardService } from './services';
+import { LocacoesChartComponent } from './components/locacoes-chart/locacoes-chart.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DashboardService } from './services';
     RevenueChartComponent,
     DailyLineChartComponent,
     SupportRequestsComponent,
-    ProjectStatChartComponent
+    ProjectStatChartComponent,
+    LocacoesChartComponent
   ],
   imports: [
     CommonModule,

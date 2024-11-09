@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 import {
   DailyLineChartData,
@@ -11,40 +14,50 @@ import {
   VisitsChartData
 } from '../models';
 
+export interface SeriesData {
+  name: string;
+  values: number[];
+  labels: string[];
+}
+
+const URL_DASHBOARD = '/api/v1/dashboard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
+
+  constructor(private http: HttpClient) {}
+
+  getCalendarByPeriod(startDate: string, endDate: string, status: string): Observable<SeriesData[]>{
+    return this.http.get(`${environment.URL_API}${URL_DASHBOARD}/locacoes-by-period?StartDate=${startDate}&EndDate=${endDate}&Status=${status}`)
+    .pipe(map((resp: SeriesData[]) => {
+      return resp;
+    }));
+  }
+
   public loadDailyLineChartData(): Observable<DailyLineChartData> {
     return of({
       dailyData: {
-        mobile: [16, 46, 45, 12, 37, 16, 41, 13, 25, 22, 30],
-        desktop: [42, 60, 49, 50, 13, 15, 16, 57, 56, 27, 43],
-        tablet: [35, 25, 36, 30, 67, 35, 64, 12, 25, 36, 39]
+        mobile: [16, 46, 45, 12],
+        desktop: [42, 60, 49, 50],
+        tablet: [35, 25, 36, 30]
       },
       weeklyData: {
-        mobile: [23, 31, 45, 10, 37, 67, 43, 63, 15, 22, 30],
-        desktop: [67, 60, 49, 50, 25, 15, 16, 57, 13, 27, 43],
-        tablet: [56, 48, 23, 48, 13, 35, 64, 12, 45, 36, 39]
+        mobile: [23, 31, 45, 10],
+        desktop: [67, 60, 49, 50],
+        tablet: [56, 48, 23, 48]
       },
       monthlyData: {
-        mobile: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-        desktop: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-        tablet: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+        mobile: [23, 11, 22, 27],
+        desktop: [44, 55, 41, 67],
+        tablet: [30, 25, 36, 30]
       },
       labels: [
-        '01/01/2003',
-        '02/01/2003',
-        '03/01/2003',
-        '04/01/2003',
-        '05/01/2003',
-        '06/01/2003',
-        '07/01/2003',
-        '08/01/2003',
-        '09/01/2003',
-        '10/01/2003',
-        '11/01/2003'
+        '01/11/2024',
+        '02/11/2024',
+        '03/11/2024',
+        '04/11/2024'
       ]
     });
   }

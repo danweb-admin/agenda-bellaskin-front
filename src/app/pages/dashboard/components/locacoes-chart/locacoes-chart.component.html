@@ -1,0 +1,33 @@
+<mat-card class="chart">
+    <mat-card-title class="chart__header">
+      <p class="chart__title">Locações</p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="locacoes-chart-wrapper__separate">
+            <input matInput class="locacoes-chart-wrapper__search-input" [matDatepicker]="dp"  placeholder="Data Início" formControlName="startDate" (focus)="dp.open()">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </div>
+    
+        <div class="locacoes-chart-wrapper__separate">
+            <input matInput class="locacoes-chart-wrapper__search-input" [matDatepicker]="dp1"  placeholder="Data Final"  formControlName="endDate" (focus)="dp1.open()">
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+        </div>
+        <div class="locacoes-chart-wrapper__separate">
+            <mat-select formControlName="status" class="locacoes-chart-wrapper__search-input" placeholder="Status" multiple>
+                <mat-option value="1">Confirmada</mat-option>
+                <mat-option value="2">Pendente</mat-option>
+                <mat-option value="3">Cancelada</mat-option>
+                <mat-option value="4">Excluida</mat-option>
+                <mat-option value="5">Pré Agendada</mat-option>
+            </mat-select>
+        </div>
+        <button mat-raised-button color="primary" [disabled]="!form.valid" style="float: right;">Gerar</button>
+      </form>
+      
+    </mat-card-title>
+  
+    <mat-card-content class="chart__content" style="margin-top: 60px;">
+        <div echarts [options]="chartOptions" class="demo-chart"></div>
+    </mat-card-content>
+  </mat-card>

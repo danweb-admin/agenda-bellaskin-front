@@ -1,4 +1,7 @@
 <mat-list>
+  <mat-list-item *ngIf="isAdmin" routerLink="{{routes.DASHBOARD}}" routerLinkActive="active">
+    <mat-icon>dashboard</mat-icon> DASHBOARD
+  </mat-list-item>
   <mat-list-item *ngIf="isAdmin" routerLink="{{routes.PEOPLE}}" routerLinkActive="active">
     <mat-icon>local_shipping</mat-icon> Motoristas/Técnicas
   </mat-list-item>
