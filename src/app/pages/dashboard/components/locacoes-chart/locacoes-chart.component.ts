@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -16,73 +16,53 @@ import * as moment from 'moment';
     ],
 })
 
-export class LocacoesChartComponent implements OnInit {
+export class LocacoesChartComponent implements OnChanges {
     
-    status: string;
-    form: FormGroup;
     chartOptions: any;
     
-    constructor(private dashboardService: DashboardService, 
-        private formBuilder: FormBuilder) {}
-        
-        ngOnInit(): void {
-            
-            const startDate_ = moment().startOf('month');
-            const endDate_ = moment().endOf('month');
-            const _status = ['1'];
-            
-            this.form = this.formBuilder.group({
-                startDate: [startDate_, Validators.required],
-                endDate: [endDate_, Validators.required],
-                status: [_status, Validators.required],
-            });
-            
-            
-            this.gerarChart()
-        }
-        
-        gerarChart(){
-            const startDate = this.form.value.startDate.format('DD-MM-YYYY')
-            const endDate = this.form.value.endDate.format('DD-MM-YYYY')
-            
-            this.dashboardService.getCalendarByPeriod(startDate,endDate,this.form.value.status).subscribe((data: SeriesData[]) => {
-                this.setChartOptions(data);
-            });
-        }
-        
-        private setChartOptions(data: SeriesData[]) {
-            
-            const xAxisLabels = data[0]?.labels || [];
-            const totalizadores = data.map(series => `${series.name}: ${series.values.reduce((acc, val) => acc + val, 0)}`).join(' | ');
+    constructor(private dashboardService: DashboardService){}
+    @Input() filters: any;
+    
+    ngOnChanges(changes: SimpleChanges): void {
+        const startDate = this.filters.startDate
+        const startDate_ = startDate.format('YYYY-MM-DD');
 
-            
-            this.chartOptions = {
-                title: {
-                    text: 'Gráfico de Locações por Período e Status',
-                    subtext: `Totalizadores - ${totalizadores}`, // Exibe o total no subtexto
-                    left: 'center'
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                xAxis: {
-                    type: 'category',
-                    data: xAxisLabels,
-                },
-                yAxis: {
-                    type: 'value',
-                },
-                series: data.map(series => ({
-                    name: series.name,
-                    type: 'bar', 
-                    data: series.values
-                }))  
-            };
-        }
-        
-        onSubmit(){
-            this.gerarChart();
-            console.log(this.form);
-        }
+        const endDate = this.filters.endDate
+        const endDate_ = endDate.format('YYYY-MM-DD');
+        this.dashboardService.getCalendarByPeriod(startDate_,endDate_,this.filters.status).subscribe((data: SeriesData[]) => {
+            this.setChartOptions(data);
+        });
     }
     
+    
+    private setChartOptions(data: SeriesData[]) {
+        
+        const xAxisLabels = data[0]?.labels || [];
+        const totalizadores = data.map(series => `${series.name}: ${series.values.reduce((acc, val) => acc + val, 0)}`).join(' | ');
+        
+        
+        this.chartOptions = {
+            title: {
+                text: 'Gráfico de Locações por Período e Status',
+                subtext: `Totalizadores - ${totalizadores}`, // Exibe o total no subtexto
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type: 'category',
+                data: xAxisLabels,
+            },
+            yAxis: {
+                type: 'value',
+            },
+            series: data.map(series => ({
+                name: series.name,
+                type: 'bar', 
+                data: series.values
+            }))  
+        };
+    }
+    
+}

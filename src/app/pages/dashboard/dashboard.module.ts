@@ -15,7 +15,6 @@ import { MatInputModule } from '@angular/material/input';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
 
-import { DashboardPageComponent } from './containers';
 import {
   VisitsChartComponent,
   PerformanceChartComponent,
@@ -27,6 +26,10 @@ import {
 } from './components';
 import { SharedModule } from '../../shared/shared.module';
 import { DashboardService } from './services';
+import { EquipmentChartComponent } from './components/equipment-chart/equipment-chart.component';
+import { DriverChartComponent } from './components/driver-chart/driver-chart.component';
+import { FilterChartComponent } from './components/filter-chart/filter-chart.component';
+import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
 import { LocacoesChartComponent } from './components/locacoes-chart/locacoes-chart.component';
 
 
@@ -40,7 +43,10 @@ import { LocacoesChartComponent } from './components/locacoes-chart/locacoes-cha
     DailyLineChartComponent,
     SupportRequestsComponent,
     ProjectStatChartComponent,
-    LocacoesChartComponent
+    LocacoesChartComponent,
+    EquipmentChartComponent,
+    DriverChartComponent,
+    FilterChartComponent
   ],
   imports: [
     CommonModule,

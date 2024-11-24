@@ -1,0 +1,26 @@
+<div class="filter-bar">
+    <h3 style="margin-left: 15px">Filtros</h3>
+    <mat-form-field appearance="outline" style="margin-right: 15px; margin-left: 15px">
+      <mat-label>Data Inicial</mat-label>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="filters.startDate" (dateChange)="onFilterChange()">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" style="margin-right: 15px;">
+      <mat-label>Data Final</mat-label>
+      <input matInput [matDatepicker]="endPicker" [(ngModel)]="filters.endDate" (dateChange)="onFilterChange()">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="filters.status" (selectionChange)="onFilterChange()" multiple>
+            <mat-option value="1">Confirmada</mat-option>
+            <mat-option value="2">Pendente</mat-option>
+            <mat-option value="3">Cancelada</mat-option>
+            <mat-option value="4">Excluida</mat-option>
+            <mat-option value="5">Pré Agendada</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>

@@ -36,6 +36,20 @@ export class DashboardService {
     }));
   }
 
+  getEquipmentByPeriod(startDate: string, endDate: string, status: string): Observable<SeriesData[]>{
+    return this.http.get(`${environment.URL_API}${URL_DASHBOARD}/equipment-by-period?StartDate=${startDate}&EndDate=${endDate}&Status=${status}`)
+    .pipe(map((resp: SeriesData[]) => {
+      return resp;
+    }));
+  }
+
+  getDriverByPeriod(startDate: string, endDate: string, status: string): Observable<SeriesData[]>{
+    return this.http.get(`${environment.URL_API}${URL_DASHBOARD}/driver-by-period?StartDate=${startDate}&EndDate=${endDate}&Status=${status}`)
+    .pipe(map((resp: SeriesData[]) => {
+      return resp;
+    }));
+  }
+
   public loadDailyLineChartData(): Observable<DailyLineChartData> {
     return of({
       dailyData: {

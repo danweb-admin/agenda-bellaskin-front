@@ -26,6 +26,7 @@ export class DashboardPageComponent {
   public supportRequestData$: Observable<SupportRequestData[]>;
   public visitsChartData$: Observable<VisitsChartData>;
   public projectsStatsData$: Observable<ProjectStatData>;
+  activeFilters: any = {};
 
   constructor(private service: DashboardService) {
     this.dailyLineChartData$ = this.service.loadDailyLineChartData();
@@ -35,5 +36,9 @@ export class DashboardPageComponent {
     this.supportRequestData$ = this.service.loadSupportRequestData();
     this.visitsChartData$ = this.service.loadVisitsChartData();
     this.projectsStatsData$ = this.service.loadProjectsStatsData();
+  }
+
+  onFilterChanged(filters: any): void {
+    this.activeFilters = { ...filters };
   }
 }
