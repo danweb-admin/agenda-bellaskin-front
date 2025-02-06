@@ -56,7 +56,9 @@
                     <tbody>
                         <tr *ngFor="let item of list.List"> 
                             <th class="fixed-side">{{item.Equipament}}</th>
-                            <td *ngFor="let day of item.DayList" [ngClass]="day.Available ? 'green' : 'red'"></td>
+                            <td *ngFor="let day of item.DayList" [ngClass]="day.Available ? 'green' : 'red'">
+                                <div style="font-size: 9px; width: 50px; padding: 0;">{{day.Time ? day.Time : '    '}}</div>
+                            </td>
                         </tr>
                         
                     </tbody>
@@ -67,7 +69,7 @@
                                 <span class="subtitle-available"></span>
                                 <span class="display">Disponível</span>
                             </td>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <span class="subtitle-unavailable"></span>
                                 <span class="display">Indisponível</span>
                             </td>

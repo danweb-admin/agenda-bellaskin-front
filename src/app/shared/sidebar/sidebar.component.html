@@ -32,6 +32,9 @@
       <mat-list-item *ngIf="isAdmin" class="ui-element" [style.display]="isOpenLocations ? 'flex' : 'none'" routerLink="{{routes.AVAILABILITY}}" routerLinkActive="active">
         <div class="circle"></div>Disponibilidade
       </mat-list-item>
+      <mat-list-item *ngIf="isAdmin" class="ui-element" [style.display]="isOpenLocations ? 'flex' : 'none'" routerLink="{{routes.BULK_SCHEDULING}}" routerLinkActive="active">
+        <div class="circle"></div>Agenda em Lote
+      </mat-list-item>
     </div>
     <mat-list-item (click)="openContracts()">
       <mat-icon>description</mat-icon> Contratos

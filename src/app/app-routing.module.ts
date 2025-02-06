@@ -107,6 +107,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/generate-contract/generate-contract.module' ).then(m => m.GenerateContractModule)
   },
   {
+    path: 'agenda-em-lote',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/bulk-scheduling/bulk-scheduling.module' ).then(m => m.BulkSchedulingModule)
+  },
+  {
     path: '**',
     redirectTo: '404'
   }

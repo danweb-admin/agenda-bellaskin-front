@@ -15,7 +15,7 @@ export class CalendarService {
   
   constructor(private http: HttpClient){
 
-  }
+  } 
 
   getCalendarByDay(date: string): Observable<Calendar[]>{
     return this.http.get(`${environment.URL_API}${URL_CALENDARS}/?date=${date}`)
@@ -86,6 +86,13 @@ export class CalendarService {
     .pipe(map((resp: any[]) => {
       return resp;
     }));
+  }
+
+  bulkScheduling(bulkScheduling: any): Observable<any>{
+    return this.http.post(`${environment.URL_API}${URL_CALENDARS}/bulk-scheduling`,bulkScheduling)
+    .pipe(map((resp: Calendar) => {
+      return resp;
+    }))
   }
 }
 

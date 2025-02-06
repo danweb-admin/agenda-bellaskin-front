@@ -1,0 +1,119 @@
+<mat-card class="client-table">
+    <mat-card-title class="client-table__header">
+        <h5 class="client-table__title">Agenda em Lote</h5>
+    </mat-card-title>
+    
+    <mat-card-content >
+        <form [formGroup]="form">
+            <input type="hidden" formControlName="clientId">
+            <div class="row">
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Locatário(a)</mat-label>
+                        <input matInput placeholder="Busca Locatário(a)"  aria-label="State" [matAutocomplete]="auto"  formControlName="client">
+                        
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngIf="isLoading" class="is-loading">Carregando...</mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let option of clientResult" [value]="option" (onSelectionChange)="optionSelected($event)">
+                                    <span>{{ option.name }} - {{option.city.nome}} - {{option.state.sigla}}</span>
+                                    
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <span *ngIf="notFound">Não encontrado.</span>
+                </div>
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Equipamento</mat-label>
+                        <mat-select formControlName="equipmentId" (selectionChange)="onChangeEquipament($event)">
+                            <mat-option *ngFor="let item of equipmentResult" [value]="item.id">{{item.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Técnica</mat-label>
+                        <mat-select id="techniqueId" formControlName="techniqueId" [(value)]="form.value.techniqueId">
+                          <mat-option *ngFor="let item of techniqueResult" [value]="item.id">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ponteiras</mat-label>
+                        <mat-chip-list multiple id="chipList" [selectable]="true" >
+                            <mat-chip formArrayName="calendarSpecifications" *ngFor="let item of form.get('calendarSpecifications').value" [selected]="item.active" (click)="item.active=!item.active;">{{item.name}}</mat-chip>
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Data</mat-label>
+                        <input matInput [matDatepicker]="dp" [min]="todayDate" placeholder="Data" formControlName="currentDate" (focus)="dp.open()">
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp (closed)="addDate()"></mat-datepicker>
+                    </mat-form-field>
+                    
+                </div>
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Início</mat-label>
+                        <input matInput placeholder="Início" formControlName="startTime1" mask="00:00" (blur)="onBlur($event)">
+                    </mat-form-field>
+                </div>
+                <div class="col col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Final</mat-label>
+                        <input matInput placeholder="Final" formControlName="endTime1" mask="00:00" (blur)="onBlur($event)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                
+                
+                <div>
+                    <h3>Datas Selecionadas:</h3>
+                    <div class="date-grid">
+                        <div class="date-item" *ngFor="let date of selectedDates">
+                            <span>{{ date | date: 'dd/MM/yyyy' }}</span>
+                            <button mat-icon-button (click)="removeDate(date)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Observação</mat-label>
+                        <input matInput placeholder="Observação" formControlName="note">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                
+                <h3>Retorno:</h3>
+                <div class="grid">
+                    <div class="date-item1" *ngFor="let item of retornos">
+                        <span *ngIf="item.status == 'Ok'" style="color: green; font-weight: 600;">{{ item.message }}</span>
+                        <span *ngIf="item.status != 'Ok'" style="color: red; font-weight: 600;">{{ item.message }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button mat-raised-button color="warn" [disabled]="!form.valid" (click)="checkScheduling()" style="float: right; margin-left: 10px;">Validar Agendamentos</button>
+                <button mat-raised-button color="primary" [disabled]="!isValidated" (click)="saveScheduling()" style="float: right;">Salvar</button>
+                
+            </div>
+        </form>
+        
+    </mat-card-content>
+    
+</mat-card>
